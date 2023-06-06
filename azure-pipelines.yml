@@ -19,3 +19,15 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
+- task: SonarQubePrepare@5
+  inputs:
+    SonarQube: SonarQube
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'Nodejs'
+    cliProjectName: 'nodejs'
+    cliSources: 'node_modules'
+- task: SonarQubePublish@5
+  inputs:
+    pollingTimeoutSec: '300'
+- task: SonarQubeAnalyze@5
